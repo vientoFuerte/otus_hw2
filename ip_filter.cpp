@@ -1,4 +1,4 @@
-﻿// ip_filter.cpp 
+﻿// ip_filter.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
 //
 
 #include <cassert>
@@ -9,8 +9,10 @@
 #include <algorithm>
 #include <sstream>
 
-#include "ip_filter.h"
 
+struct IPAddress {
+    uint32_t ip;
+};
 
 
 // Из строки выделить 4 фграмента IP адреса и склеить в одно число.
@@ -85,5 +87,185 @@ IPAddress parseIPAddress(const std::string& ipStr) {
 
 
 
+int main(int argc, char const* argv[])
+{
+
+    // Вектор для хранения IP-адресов в числовом представлении
+    std::vector<IPAddress> ip_pool;
+
+    std::ifstream inputFile;
+
+#if 0
+    std::string filename = "ip_filter.tsv";
+
+    // Открываем файл для чтения
+    std::ifstream inputFile(filename);
+
+    if (!inputFile.is_open()) 
+    {
+        std::cerr << "File open error: " << filename << std::endl;
+        std::cerr << "Error code: " << inputFile.rdstate() << std::endl;
+        return 1;
+    }
+    else
+    {
+        std::cout << "file opened" << std::endl;
+    }
+
+#endif
+    try
+    {
+        // Читаем IP-адреса из файла
+        std::string line;
+
+        for (std::string line; std::getline(std::cin, line);)
+        {
+            ip_pool.push_back(parseIPAddress(line));
+        }
+        /*
+        while (std::getline(inputFile, line)) 
+        {
+            ip_pool.push_back(parseIPAddress(line));
+        }*/
+
+        // Сортируем IP-адреса в числовом представлении
+        std::sort(ip_pool.begin(), ip_pool.end(), compareIP);
+
+        // Выводим отсортированный список IP-адресов в числовом представлении
+        for (const auto& addr : ip_pool) {
+            std::cout << intToIPStr(addr.ip) << std::endl;
+        }
+
+        // Фильтрация IP адресов по первому байту
+        std::vector<IPAddress> filteredIPs;
+        for (const auto& ipObj : ip_pool) {
+            if (getFirstByte(ipObj.ip) == 1) {
+                filteredIPs.push_back(ipObj);
+            }
+        }
+
+        // Вывод результатов
+        for (const auto& ipObj : filteredIPs) {
+            std::cout << intToIPStr(ipObj.ip) << std::endl;
+        }
+
+        // Очистка вектора filteredIPs
+        filteredIPs.clear();
+
+        // Фильтрация IP адресов по первому и второму байтам
+        for (const auto& ipObj : ip_pool) {
+            if (getFirstByte(ipObj.ip) == 46 && getSecondByte(ipObj.ip) == 70) {
+                filteredIPs.push_back(ipObj);
+            }
+        }
+
+        // Вывод результатов
+        for (const auto& ipObj : filteredIPs) {
+            std::cout << intToIPStr(ipObj.ip) << std::endl;
+        }
+
+        // Очистка вектора filteredIPs
+        filteredIPs.clear();
+
+        // Фильтрация IP адресов по любому байту
+        for (const auto& ipObj : ip_pool) {
+            if (getFirstByte(ipObj.ip) == 46 || 
+                (getSecondByte(ipObj.ip) == 46) ||
+                (getThirdByte(ipObj.ip) == 46) ||
+                (getFourthByte(ipObj.ip) == 46)) 
+            {
+                filteredIPs.push_back(ipObj);
+            }
+        }
+
+        // Вывод результатов
+        for (const auto& ipObj : filteredIPs) {
+            std::cout << intToIPStr(ipObj.ip) << std::endl;
+        }
 
 
+        // 222.173.235.246
+        // 222.130.177.64
+        // 222.82.198.61
+        // ...
+        // 1.70.44.170
+        // 1.29.168.152
+        // 1.1.234.8
+
+        // TODO filter by first byte and output
+        // ip = filter(1)
+
+        // 1.231.69.33
+        // 1.87.203.225
+        // 1.70.44.170
+        // 1.29.168.152
+        // 1.1.234.8
+
+        // TODO filter by first and second bytes and output
+        // ip = filter(46, 70)
+
+        // 46.70.225.39
+        // 46.70.147.26
+        // 46.70.113.73
+        // 46.70.29.76
+
+        // TODO filter by any byte and output
+        // ip = filter_any(46)
+
+        // 186.204.34.46
+        // 186.46.222.194
+        // 185.46.87.231
+        // 185.46.86.132
+        // 185.46.86.131
+        // 185.46.86.131
+        // 185.46.86.22
+        // 185.46.85.204
+        // 185.46.85.78
+        // 68.46.218.208
+        // 46.251.197.23
+        // 46.223.254.56
+        // 46.223.254.56
+        // 46.182.19.219
+        // 46.161.63.66
+        // 46.161.61.51
+        // 46.161.60.92
+        // 46.161.60.35
+        // 46.161.58.202
+        // 46.161.56.241
+        // 46.161.56.203
+        // 46.161.56.174
+        // 46.161.56.106
+        // 46.161.56.106
+        // 46.101.163.119
+        // 46.101.127.145
+        // 46.70.225.39
+        // 46.70.147.26
+        // 46.70.113.73
+        // 46.70.29.76
+        // 46.55.46.98
+        // 46.49.43.85
+        // 39.46.86.85
+        // 5.189.203.46
+    }
+    catch (const std::exception & e)
+    {
+        std::cerr << e.what() << std::endl;
+    }
+
+    // Закрываем файл
+    inputFile.close();
+
+    return 0;
+}
+
+
+// Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
+// Отладка программы: F5 или меню "Отладка" > "Запустить отладку"
+
+// Советы по началу работы 
+//   1. В окне обозревателя решений можно добавлять файлы и управлять ими.
+//   2. В окне Team Explorer можно подключиться к системе управления версиями.
+//   3. В окне "Выходные данные" можно просматривать выходные данные сборки и другие сообщения.
+//   4. В окне "Список ошибок" можно просматривать ошибки.
+//   5. Последовательно выберите пункты меню "Проект" > "Добавить новый элемент", чтобы создать файлы кода, или "Проект" > "Добавить существующий элемент", чтобы добавить в проект существующие файлы кода.
+//   6. Чтобы снова открыть этот проект позже, выберите пункты меню "Файл" > "Открыть" > "Проект" и выберите SLN-файл.
