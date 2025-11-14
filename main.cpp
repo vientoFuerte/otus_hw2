@@ -95,7 +95,7 @@ IPAddress parseIPAddress(const std::string& ipStr) {
 
 
 
-int main(int argc, char const* argv[])
+int main()
 {
 
     // Вектор для хранения IP-адресов в числовом представлении
@@ -265,4 +265,5 @@ int main(int argc, char const* argv[])
 
     return 0;
 }
+
 
