@@ -1,5 +1,6 @@
 ﻿// main.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
 //
+#include "lib.h"
 
 #include <cassert>
 #include <iostream>
@@ -257,5 +258,6 @@ int main(int argc, char const* argv[])
 
     return 0;
 }
+
 
 
