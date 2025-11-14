@@ -255,9 +255,9 @@ int main(int argc, char const* argv[])
 
     // Закрываем файл
     //inputFile.close();
-
     return 0;
 }
+
 
 
 
