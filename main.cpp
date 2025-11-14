@@ -1,6 +1,6 @@
-﻿// main.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
+
+// ip_filter.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
 //
-#include "lib.h"
 
 #include <cassert>
 #include <iostream>
@@ -10,9 +10,16 @@
 #include <algorithm>
 #include <sstream>
 
+// Source - https://stackoverflow.com/a
+// Posted by templatetypedef, modified by community. See post 'Timeline' for change history
+// Retrieved 2025-11-15, License - CC BY-SA 4.0
+
+#include <stdint.h>
+
+
 
 struct IPAddress {
-    uint32_t ip;
+     uint32_t ip;
 };
 
 
@@ -254,11 +261,8 @@ int main(int argc, char const* argv[])
     }
 
     // Закрываем файл
-    //inputFile.close();
+    inputFile.close();
+
     return 0;
 }
-
-
-
-
 
