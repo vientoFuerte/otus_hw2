@@ -12,7 +12,7 @@ struct IPAddress {
      uint32_t ip;
 };
 
-int32_t ipStrToInt(const std::string& ipStr);
+//int32_t ipStrToInt(const std::string& ipStr);
 
 std::string intToIPStr(uint32_t ip);
 
