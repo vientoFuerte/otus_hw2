@@ -9,8 +9,8 @@ option(WITH_BOOST_TEST "Whether to build Boost test" ON)
 
 configure_file(version.h.in version.h)
 
-add_executable(helloworld_cli main.cpp ip_filter.cpp)
-add_library(ip_filter lib.cpp)
+add_executable(helloworld_cli main.cpp)
+add_library(ip_filter lib.cpp ip_filter.cpp)
 
 set_target_properties(helloworld_cli ip_filter PROPERTIES
     CXX_STANDARD 14
