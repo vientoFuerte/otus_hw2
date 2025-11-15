@@ -9,7 +9,7 @@
 #include <algorithm>
 #include <sstream>
 
-#include "ip_filter.h"
+#include "ip_filter.cpp"
 
 
 int main()
@@ -182,4 +182,5 @@ int main()
 
     return 0;
 }
+
 
