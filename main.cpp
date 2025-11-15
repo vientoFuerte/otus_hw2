@@ -10,17 +10,7 @@
 #include <algorithm>
 #include <sstream>
 
-// Source - https://stackoverflow.com/a
-// Posted by templatetypedef, modified by community. See post 'Timeline' for change history
-// Retrieved 2025-11-15, License - CC BY-SA 4.0
-
-#include <stdint.h>
-
-
-
-struct IPAddress {
-     uint32_t ip;
-};
+#include "ip_filter.h"
 
 
 // Из строки выделить 4 фграмента IP адреса и склеить в одно число.
@@ -265,5 +255,6 @@ int main()
 
     return 0;
 }
+
 
 
