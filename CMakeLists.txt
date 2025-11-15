@@ -9,33 +9,25 @@ option(WITH_BOOST_TEST "Whether to build Boost test" ON)
 
 configure_file(version.h.in version.h)
 
-add_executable(helloworld_cli main.cpp)
+add_executable(helloworld_cli main.cpp ip_filter.cpp ip_filter.h)
 add_library(ip_filter lib.cpp)
-add_library(ip_filter2 ip_filter.cpp)
+
 
 set_target_properties(helloworld_cli ip_filter PROPERTIES
     CXX_STANDARD 14
     CXX_STANDARD_REQUIRED ON
 )
 
-set_target_properties(helloworld_cli ip_filter2 PROPERTIES
-    CXX_STANDARD 14
-    CXX_STANDARD_REQUIRED ON
-)
 
 target_include_directories(ip_filter
     PRIVATE "${CMAKE_BINARY_DIR}"
 )
-target_include_directories(ip_filter2
-    PRIVATE "${CMAKE_BINARY_DIR}"
-)
+
 
 target_link_libraries(helloworld_cli PRIVATE
     ip_filter
 )
-target_link_libraries(helloworld_cli PRIVATE
-    ip_filter2
-)
+
 if(WITH_BOOST_TEST)
     find_package(Boost COMPONENTS unit_test_framework REQUIRED)
     add_executable(test_version test_version.cpp)
