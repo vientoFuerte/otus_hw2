@@ -30,3 +30,6 @@ uint8_t getFourthByte(uint32_t ip);
 
 // Функция сравнения для сортировки по первому байту
 bool compareByFirstByte(const IPAddress& a, const IPAddress& b);
+
+// Распарсить строку с IP-адресом.
+IPAddress parseIPAddress(const std::string& ipStr);
