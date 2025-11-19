@@ -38,34 +38,14 @@ bool compareIP(const IPAddress& a, const IPAddress& b) {
     return a.ip > b.ip;
 }
 
-// Функция для получения первого байта IP адреса
-uint8_t getFirstByte(uint32_t ip) {
-    return (ip >> 24) & 0xFF;
-}
-
-// Функция для получения второго байта IP адреса
-uint8_t getSecondByte(uint32_t ip) {
-    return (ip >> 16) & 0xFF;
-}
-// Функция для получения третьего байта IP адреса
-uint8_t getThirdByte(uint32_t ip) {
-    return (ip >> 8) & 0xFF;
-}
-
-// Функция для получения четвертого байта IP адреса
-uint8_t getFourthByte(uint32_t ip) {
-    return ip & 0xFF;
-}
-
-// Функция сравнения для сортировки по первому байту
-bool compareByFirstByte(const IPAddress& a, const IPAddress& b) {
-    return getFirstByte(a.ip) < getFirstByte(b.ip);
+uint8_t getByteFromIP(uint32_t ip, uint8_t byteIndex) {
+    return (ip >> (24 - byteIndex * 8)) & 0xFF;
 }
 
 
 // Распарсить строку с IP-адресом.
 IPAddress parseIPAddress(const std::string& ipStr) {
-    IPAddress addr {};
+    IPAddress addr{};
     addr.ip = ipStrToInt(ipStr);
     return addr;
 }
