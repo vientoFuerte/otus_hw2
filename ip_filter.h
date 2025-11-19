@@ -1,4 +1,5 @@
 #pragma once
+
 #include <stdint.h>
 #include <cassert>
 #include <iostream>
@@ -9,29 +10,20 @@
 #include <sstream>
 
 struct IPAddress {
-     uint32_t ip;
+    uint32_t ip;
 };
 
-//int32_t ipStrToInt(const std::string& ipStr);
+//Строку с IP преобразовать в целое беззнаковое число.
+uint32_t ipStrToInt(const std::string& ipStr);
 
+//Целое беззнаковое число преобразовать в строку с IP.
 std::string intToIPStr(uint32_t ip);
 
+//Сравнить IP-адреса
 bool compareIP(const IPAddress& a, const IPAddress& b);
 
-// Функция для получения первого байта IP адреса
-uint8_t getFirstByte(uint32_t ip);
-
-// Функция для получения второго байта IP адреса
-uint8_t getSecondByte(uint32_t ip);
-
-// Функция для получения третьего байта IP адреса
-uint8_t getThirdByte(uint32_t ip);
-
-// Функция для получения четвертого байта IP адреса
-uint8_t getFourthByte(uint32_t ip);
-
-// Функция сравнения для сортировки по первому байту
-bool compareByFirstByte(const IPAddress& a, const IPAddress& b);
+// Получение байта IP-адреса (байты в диапазоне от 0 до 3)
+uint8_t getByteFromIP(uint32_t ip, uint8_t byteIndex);
 
 // Распарсить строку с IP-адресом.
 IPAddress parseIPAddress(const std::string& ipStr);
