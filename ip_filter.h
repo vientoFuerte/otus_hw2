@@ -27,3 +27,6 @@ uint8_t getByteFromIP(uint32_t ip, uint8_t byteIndex);
 
 // Распарсить строку с IP-адресом.
 IPAddress parseIPAddress(const std::string& ipStr);
+
+// Вывести на печать все адреса из списка
+void printIPAddresses(const std::vector<IPAddress>& ipObjects);

@@ -41,9 +41,7 @@ int main()
         }
 
         // Вывод результатов
-        for (const auto& ipObj : filteredIPs) {
-            std::cout << intToIPStr(ipObj.ip) << std::endl;
-        }
+        printIPAddresses(filteredIPs);
 
         // Очистка вектора filteredIPs
         filteredIPs.clear();
@@ -59,9 +57,7 @@ int main()
         }
 
         // Вывод результатов
-        for (const auto& ipObj : filteredIPs) {
-            std::cout << intToIPStr(ipObj.ip) << std::endl;
-        }
+        printIPAddresses(filteredIPs);
 
         // Очистка вектора filteredIPs
         filteredIPs.clear();
@@ -78,11 +74,8 @@ int main()
         }
 
         // Вывод результатов
-        for (const auto& ipObj : filteredIPs) {
-            std::cout << intToIPStr(ipObj.ip) << std::endl;
-        }
+        printIPAddresses(filteredIPs);
 
- 
     }
     catch (const std::exception & e)
     {

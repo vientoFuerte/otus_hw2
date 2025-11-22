@@ -49,3 +49,9 @@ IPAddress parseIPAddress(const std::string& ipStr) {
     addr.ip = ipStrToInt(ipStr);
     return addr;
 }
+
+void printIPAddresses(const std::vector<IPAddress>& ipObjects) {
+    for (const auto& ipObj : ipObjects) {
+        std::cout << intToIPStr(ipObj.ip) << std::endl;
+    }
+}
