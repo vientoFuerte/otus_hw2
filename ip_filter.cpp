@@ -50,6 +50,22 @@ IPAddress parseIPAddress(const std::string& ipStr) {
     return addr;
 }
 
+// Фильтрация IP адресов по любому байту
+std::vector<IPAddress> filterByAnyByte(const std::vector<IPAddress>& ipPool, uint8_t byte) {
+    std::vector<IPAddress> filteredIPs;
+    
+    for (const auto& ipObj : ipPool) {
+        for (int i = 0; i < 4; ++i) {
+            if (getByteFromIP(ipObj.ip, i) == byte) {
+                filteredIPs.push_back(ipObj);
+                break; // Выходим после первого совпадения
+            }
+        }
+    }
+    
+    return filteredIPs;
+}
+
 void printIPAddresses(const std::vector<IPAddress>& ipObjects) {
     for (const auto& ipObj : ipObjects) {
         std::cout << intToIPStr(ipObj.ip) << std::endl;
