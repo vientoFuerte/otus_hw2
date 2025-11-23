@@ -28,9 +28,7 @@ int main()
         std::sort(ip_pool.begin(), ip_pool.end(), compareIP);
 
         // Выводим отсортированный список IP-адресов в числовом представлении
-        for (const auto& addr : ip_pool) {
-            std::cout << intToIPStr(addr.ip) << std::endl;
-        }
+        printIPAddresses(ip_pool);
 
         // Фильтрация IP адресов по первому байту
         std::vector<IPAddress> filteredIPs;
@@ -63,15 +61,7 @@ int main()
         filteredIPs.clear();
 
         // Фильтрация IP адресов по любому байту
-        for (const auto& ipObj : ip_pool) {
-            if (getByteFromIP(ipObj.ip, 0) == 46 ||
-                (getByteFromIP(ipObj.ip, 1) == 46) ||
-                (getByteFromIP(ipObj.ip, 2) == 46) ||
-                (getByteFromIP(ipObj.ip, 3) == 46))
-            {
-                filteredIPs.push_back(ipObj);
-            }
-        }
+        filteredIPs = filterByAnyByte(ip_pool, 46);
 
         // Вывод результатов
         printIPAddresses(filteredIPs);
@@ -85,6 +75,7 @@ int main()
 
     return 0;
 }
+
 
 
 
