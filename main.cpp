@@ -32,11 +32,7 @@ int main()
 
         // Фильтрация IP адресов по первому байту
         std::vector<IPAddress> filteredIPs;
-        for (const auto& ipObj : ip_pool) {
-            if (getByteFromIP(ipObj.ip, 0) == 1) {
-                filteredIPs.push_back(ipObj);
-            }
-        }
+        filteredIPs = FilterIpPool(ip_pool, 1);
 
         // Вывод результатов
         printIPAddresses(filteredIPs);
@@ -45,14 +41,7 @@ int main()
         filteredIPs.clear();
 
         // Фильтрация IP адресов по первому и второму байтам
-        for (const auto& ipObj : ip_pool) 
-        {
-            if ((getByteFromIP(ipObj.ip, 0) == 46) && 
-                (getByteFromIP(ipObj.ip, 1) == 70)) 
-            {
-                filteredIPs.push_back(ipObj);
-            }
-        }
+        filteredIPs = FilterIpPool(ip_pool, 46, 70);
 
         // Вывод результатов
         printIPAddresses(filteredIPs);
@@ -75,6 +64,7 @@ int main()
 
     return 0;
 }
+
 
 
 
