@@ -11,13 +11,9 @@ int main()
     // Вектор для хранения IP-адресов в числовом представлении
     std::vector<IPAddress> ip_pool;
 
-    std::ifstream inputFile;
-
     try
     {
         // Читаем IP-адреса из файла
-        std::string line;
-
         for (std::string line; std::getline(std::cin, line);)
         {
             ip_pool.push_back(parseIPAddress(line));
@@ -64,6 +60,7 @@ int main()
 
     return 0;
 }
+
 
 
 
